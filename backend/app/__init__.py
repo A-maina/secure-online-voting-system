@@ -1,5 +1,7 @@
 from flask import Flask
 from sqlalchemy import text
+from app.routes.auth import auth_bp
+
 from app.config.config import Config
 from app.extensions import db, migrate, bcrypt, jwt
 from app import models
@@ -7,8 +9,7 @@ from app.models.role import Role
 from app.models.user import User
 from app.models.election import Election
 from app.models import Role, User, Election, Candidate, Vote
-
-
+from app.routes.auth import auth_bp
 
 
 
@@ -17,6 +18,9 @@ def create_app():
     app = Flask(__name__)
 
     app.config.from_object(Config)
+
+    app.register_blueprint(auth_bp)
+
 
     db.init_app(app)
     
