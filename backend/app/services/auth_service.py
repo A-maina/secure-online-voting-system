@@ -15,19 +15,26 @@ def verify_password(password, password_hash):
 def authenticate_user(email, password):
     user = User.query.filter_by(email=email).first()
 
-    if not user:
+    if user is None:
         return None
 
     if not verify_password(password, user.password_hash):
         return None
 
-    token = create_access_token(identity=str(user.user_id))
+    access_token = create_access_token(
+        identity=str(user.user_id),
+        additional_claims={
+            "role": user.role.role_name
+        }
+    )
 
     return {
-        "access_token": token,
+        "access_token": access_token,
         "user": {
             "id": user.user_id,
-            "name": f"{user.first_name} {user.last_name}",
-            "email": user.email
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "email": user.email,
+            "role": user.role.role_name
         }
     }

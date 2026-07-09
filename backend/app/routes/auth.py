@@ -1,5 +1,7 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify, request
+from marshmallow import ValidationError
 
+from app.schemas.auth_schema import login_schema
 from app.services.auth_service import authenticate_user
 
 auth_bp = Blueprint(
@@ -19,17 +21,16 @@ def health():
 @auth_bp.post("/login")
 def login():
 
-    data = request.get_json()
+    try:
+        data = login_schema.load(request.get_json())
 
-    email = data.get("email")
-    password = data.get("password")
+    except ValidationError as err:
+        return jsonify(err.messages), 400
 
-    if not email or not password:
-        return jsonify({
-            "message": "Email and password are required."
-        }), 400
-
-    result = authenticate_user(email, password)
+    result = authenticate_user(
+        data["email"],
+        data["password"]
+    )
 
     if result is None:
         return jsonify({
