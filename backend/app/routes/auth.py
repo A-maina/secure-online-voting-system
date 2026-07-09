@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, request
 from marshmallow import ValidationError
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
+from app.middleware.role_required import role_required
 from app.schemas.auth_schema import login_schema
 from app.services.auth_service import authenticate_user
 
@@ -38,3 +40,18 @@ def login():
         }), 401
 
     return jsonify(result), 200
+@auth_bp.get("/profile")
+@jwt_required()
+def profile():
+
+    return {
+        "message": "Authenticated",
+        "user_id": get_jwt_identity()
+    }
+@auth_bp.get("/admin")
+@role_required("Administrator")
+def admin_only():
+
+    return {
+        "message": "Welcome Administrator!"
+    }
