@@ -2,7 +2,7 @@ from app.extensions import bcrypt
 
 
 def hash_password(password: str) -> str:
-    """Hash a plain-text password."""
+    """Generate a secure password hash."""
     return bcrypt.generate_password_hash(password).decode("utf-8")
 
 

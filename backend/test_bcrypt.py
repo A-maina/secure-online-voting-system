@@ -8,6 +8,6 @@ with app.app_context():
 
     hashed = hash_password(password)
 
-    print("Original :", password)
-    print("Hash     :", hashed)
-    print("Matches? :", verify_password(password, hashed))
+    print(f"Original Password : {password}")
+    print(f"Password Hash     : {hashed}")
+    print(f"Password Valid    : {verify_password(password, hashed)}")
