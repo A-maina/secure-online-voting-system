@@ -3,9 +3,16 @@ from app.models.base_model import BaseModel
 
 
 class Role(BaseModel):
+    """
+    Stores system user roles.
+    """
+
     __tablename__ = "roles"
 
-    role_id = db.Column(db.Integer, primary_key=True)
+    role_id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
 
     role_name = db.Column(
         db.String(50),
@@ -19,7 +26,8 @@ class Role(BaseModel):
 
     users = db.relationship(
         "User",
-        back_populates="role"
+        back_populates="role",
+        lazy=True
     )
 
     def __repr__(self):
