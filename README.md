@@ -2,37 +2,57 @@
 
 ## Overview
 
-A secure web-based election management system developed as a Bachelor of Information Security and Forensics (BISF) project.
+A secure web-based election management system developed using React, Flask, and MySQL.
+
+---
 
 ## Technology Stack
 
 ### Frontend
+
 - React
 - Vite
-- Tailwind CSS
 - React Router
 - Axios
 
 ### Backend
+
 - Flask
 - SQLAlchemy
-- Flask-JWT-Extended
-- Flask-Bcrypt
+- Flask JWT Extended
+- Flask Bcrypt
+- Flask Migrate
 
 ### Database
-- MySQL 9.7
+
+- MySQL
+
+---
+
+## User Roles
+
+- Administrator
+- Voter
+- Independent Observer
+
+---
 
 ## Features
 
-- User Authentication
+- Secure Authentication
 - Role-Based Access Control
 - Election Management
 - Candidate Management
 - Secure Voting
 - Audit Logging
 - Election Results
-- Reporting
+- Reports
+
+---
 
 ## Developer
 
 Allan Maina
+
+Bachelor of Information Security and Forensics
+KCA University
