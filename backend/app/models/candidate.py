@@ -43,6 +43,11 @@ class Candidate(BaseModel):
         "Election",
         back_populates="candidates"
     )
+    votes = db.relationship(
+    "Vote",
+    back_populates="candidate",
+    lazy=True
+)
 
     def __repr__(self):
         return f"<Candidate {self.first_name} {self.last_name}>"

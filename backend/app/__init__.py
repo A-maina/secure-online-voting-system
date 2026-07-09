@@ -6,8 +6,7 @@ from app import models
 from app.models.role import Role
 from app.models.user import User
 from app.models.election import Election
-from app.models import Role, User, Election, Candidate
-
+from app.models import Role, User, Election, Candidate, Vote
 
 
 

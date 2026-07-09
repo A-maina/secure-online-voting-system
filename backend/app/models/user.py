@@ -54,6 +54,11 @@ class User(BaseModel):
         "Role",
         back_populates="users"
     )
+    votes = db.relationship(
+    "Vote",
+    back_populates="user",
+    lazy=True
+)
 
     def __repr__(self):
         return f"<User {self.email}>"
