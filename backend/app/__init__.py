@@ -4,6 +4,7 @@ from sqlalchemy import text
 from app.routes.auth import auth_bp
 from app.config.config import Config
 from app.extensions import db, migrate, bcrypt, jwt
+from app.routes.election import election_bp
 
 
 from app import models
@@ -17,6 +18,7 @@ def create_app():
     app.config.from_object(Config)
 
     app.register_blueprint(auth_bp)
+    app.register_blueprint(election_bp)
 
 
     db.init_app(app)
