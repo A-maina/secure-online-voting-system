@@ -5,6 +5,14 @@ from app.models.base_model import BaseModel
 class Vote(BaseModel):
     __tablename__ = "votes"
 
+    __table_args__ = (
+        db.UniqueConstraint(
+            "user_id",
+            "election_id",
+            name="uq_user_election_vote"
+        ),
+    )
+
     vote_id = db.Column(
         db.Integer,
         primary_key=True
